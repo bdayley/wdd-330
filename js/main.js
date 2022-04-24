@@ -11,8 +11,8 @@ function loadIndex(){
     links.forEach( link => {
         const li = document.createElement("li");
         const href = document.createElement("a");
-        href.setAttribute("href", li.url);
-        href.innerText = li.label;
+        href.setAttribute("href", link.url);
+        href.innerText = link.label;
 
         li.appendChild(href);
         ol.appendChild(li);
