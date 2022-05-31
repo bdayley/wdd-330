@@ -1,9 +1,10 @@
 function activeFilter(todos) {
-    // filter through todos and return those not completed
+    return todos.filter( todo => { return !todo.completed });
 }
 
 function completedFilter(todos) {
-    // filter through todos and return completed
+    return todos.filter( todo => { return todo.completed });
+
 }
 
 export default {
