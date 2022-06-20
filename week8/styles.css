@@ -1,0 +1,71 @@
+#container1 {
+    margin-bottom: 50px;
+}
+
+#container1 span:hover {
+    color: blue;
+    transform: rotate(-10deg) skew(20deg) translateY(40px) scale(1.5);
+    display: inline-block;
+}
+
+#container2 {
+    margin-bottom: 50px;
+}
+#container2 span:hover {
+    color: green;
+    transform: rotate(50deg) translateY(-20px) scale(2.5);
+    display: inline-block;
+}
+#container2 span {
+    transition-property: transform, color;
+    transition-duration: 4s;
+    transition-timing-function: ease-out;
+    transition-delay: 200ms;
+    /*
+    shorthand
+    transition: transform 4s ease-out 200ms;
+    */
+}
+/*
+Animation
+https://www.youtube.com/watch?v=YszONjKpgg4
+*/
+
+.parent {
+    background-color: rgb(25, 73, 175);
+    height: 200px;
+    width: 200px;    
+}
+
+.child {
+    background-color: rgb(187, 17, 17);
+    height: 50%;
+    width: 50%;
+    animation: left-to-right 1s ease-in forwards 1 alternate;
+}
+
+.parent:hover .child {    
+    animation-play-state: paused;
+}
+
+
+@keyframes left-to-right {
+    0% {
+        background-color: aqua;
+        transform: translateX(0);
+    }
+    33% {
+        transform: translateY(100%);        
+    }
+    66% {
+        transform: translateX(100%) translateY(100%);
+    }
+    100% {
+        background-color: blueviolet;
+        transform: translateX(100%);
+    }
+}
+
+.myCanvas {
+    border: dotted 2px black;    
+}
