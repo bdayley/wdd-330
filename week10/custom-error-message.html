@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Error Message</title>
+    <link rel="stylesheet" href="custom-error-message.css">    
+</head>
+<body>
+    <!-- <form action="">
+        <label for="mail">I would like you to provide me with an e-mail address:</label>
+        <input type="email" id="mail" name="mail">
+        <button>Submit</button>
+    </form> -->
+
+    <form novalidate>
+        <!-- novalidate turns off the browser's automatic validation -->
+        <p>
+            <label for="mail">
+                <span>Please enter your email address:</span>
+                <input type="email" id="mail" name="mail" required minlength="8">
+                <span class="error" aria-live="polite"></span>
+                <!-- aria-live attribute makes sure that our custom error message will be presented to everyone, including it being read out to screenreader users -->
+            </label>
+        </p>
+        <button>Submit</button>
+    </form>
+    <script src="custom-error-message.js"></script>
+</body>
+</html>
+<!-- https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation -->
