@@ -1,0 +1,57 @@
+PROPOSAL:
+
+Deck of Cards API – 21 game variation
+
+For the block 2 challenge, I'm going to use the Deck of Cards API and create a version of the game 21. 
+The dealer (computer) and the player will each be dealt 2 cards. The dealer will draw again if their 
+total is 11 or less. The player will choose if they draw again. After drawing, if the player total is 
+over 21, they lose. The play continues until the player decides to stop. The winner is the one whose 
+cards sum is closest to 21, without going over.
+
+Possible functions/modules:
+
+fetchJson
+
+showCards
+
+drawAgain
+
+calculateTotal
+
+newGame
+
+For testing, the dealer’s cards & total will be shown, or at least logged in the console.
+
+---------
+
+TODO:
+0 - wireframe for layout
+1 - store deck id in variable
+2 - draw card from that deck id
+3 - when card is drawn, add to a pile (of current player)
+4 - calculate total of piles
+5 - display player cards
+6 - display player total
+7 - console.log dealer's cards and total
+8 - button to draw again
+9 - button to pass on draw (and initiate end of game)
+10 - after every draw, check if game is over (player either goes over 21 or passes)
+11 - when game over, display winner
+12 - have option for a new game
+
+ALSO:
+- add CSS to all weeks
+
+--------
+
+Week 12:
+- steps 0-4
+- start CSS 
+
+Week 13:
+- steps 5-10
+- continue CSS
+
+Week 14: 
+- steps 11-12
+- any finishing touches
