@@ -1,3 +1,5 @@
+/*
+
 // const url = "https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1"
 
 // TODO need new deck
@@ -35,31 +37,35 @@ function getJSON() {
         });
 }
 
+*/
 
-/*
-function returnAPI(url) {
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            const fetchJSON = data;
-            console.log("data", fetchJSON.contents);
+const brandNewDeckURL = 'https://www.deckofcardsapi.com/api/deck/new/';
+
+function getJSON(url) {
+    return fetch(url)
+        .then(function(response) {
+            if (!response.ok) {
+                throw Error(response.statusText);
+            } else {
+                return response.json();
+            }
         })
-        .catch(error => console.log('There was an error', error));
+        .then(data => {
+            const JSONdata = data;
+            return JSONdata;
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
 }
-returnAPI(url);
-*/
 
-/*
-function testAPI(url) {
-    fetch(url).then(async response => {
-        try {
-         const data = await response.json()
-         console.log('response data?', data)
-       } catch(error) {
-         console.log('Error happened here!')
-         console.error(error)
-       }
-      })
+function brandNewDeck(url) {
+    deckData = getJSON(url);
+    return deckData;
 }
-testAPI(url);
-*/
+
+// let deckInfo = brandNewDeck(brandNewDeckURL);
+// console.log('deckInfo: ', deckInfo);
+// console.log('deck id: ', deckInfo.deck_id) // undefined, need to use async and await??
+
+
