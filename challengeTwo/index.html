@@ -25,25 +25,26 @@
         <!-- nothing here until the end of a game -->
     </div>
 
-    <!-- innards hidden until game starts; OR, build with javascript instead? -->
-    <div id="playerInfo">
-        <div id="cards">
-            <p>Your Cards:</p>
-        </div>
-        <div id="total">
-            <p>Your Total:</p>            
-        </div>
+    <!-- hide these divs until game starts -->
+    <div id="userInfo">
+        <p>Your Cards:</p>
+        <div id="userCards"></div>
+        
+        <p>Your Total:</p>            
+        <div id="userTotal"></div>
+
         <button id="drawAgain">Draw Again</button>
         <button id="pass">Pass</button>
     </div>
 
-    <div id="dealerInfo">
-        <!-- maybe create the innards with javascript? -->
+    <div id="dealerInfo">        
+        <p>Dealer Cards:</p>
+        <div id="dealerCards"></div>
+        
+        <p>Dealer Total:</p>
+        <div id="dealerTotal"></div>
     </div>
     <br>
-    <div id="output"></div>
-    <img id="img1" src="" alt="">
-    <button id="newCard">New Card</button>
     <script src="main.js"></script>
 </body>
 </html>
