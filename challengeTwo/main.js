@@ -19,23 +19,37 @@ let gameOver= false;
 const userPile = 'user';
 let userCardImgs = [];
 let userCards = [];
+let userTotal = 0;
 
 const dealerCardDiv = document.getElementById('dealerCards');
 const dealerPile = 'dealer';
 let dealerCardImgs = [];
 let dealerCards = [];
+let dealerTotal = 0;
 
 const playingCardBack = '/images/playing-cards-back-delta-vector-2848246-2.jpg'
 
 // event listeners
-const startGameButton = document.querySelector('#startGame');
-startGameButton.addEventListener('click', function () { startGame(newDeckURL); });
+const startGameBtn = document.querySelector('#startGameBtn');
+startGameBtn.addEventListener('click', function () { startGame(newDeckURL); });
 
-const drawButton = document.querySelector('#drawBtn');
-drawButton.addEventListener('click', function() { drawCard(userPile); })
+const drawBtn = document.querySelector('#drawBtn');
+drawBtn.addEventListener('click', function() { drawCard(userPile); })
+
+const passBtn = document.querySelector('#passBtn');
+//passBtn.addEventListener('click', endGame);
+// TODO implement endGame function (or however the game will end...)
 
 async function startGame(url) {
-    // TODO: hide startGameButton
+    // hide startGameBtn, show draw and pass buttons    
+    startGameBtn.style.display = 'none';
+    drawBtn.style.display = 'inline-block';
+    passBtn.style.display = 'inline-block';
+
+    // reset totals
+    userTotal = 0;
+    dealerTotal = 0;
+
     try {
         let response = await fetch(url);
         if (!response.ok) {
@@ -83,9 +97,12 @@ async function drawCard(player) {
                 console.log('dealer cards values: ', dealerCards);
                 // console.log('player cards values: ', userCards);                         
                 
-                addToPile(player, card, suit);
+                addToPile(player, card, suit); // might not use this
                 displayCards(player);
                 calculateTotal(player);
+
+                // check if dealer needs to draw here??
+
             }
         } else {
             console.log('Wait a second and try again');
@@ -142,6 +159,37 @@ async function listPile(pileName) {
     }
 }
 
+function displayCards(player) { 
+    //console.log('inside displayCards function')   ;
+    if (player === 'user') {        
+        const userCardDiv = document.getElementById('userCards');
+        userCardDiv.innerHTML = ''; // clear out display first
+        if (userCardImgs) { // userCardImgs.length > 0
+            //console.log('in userCardImgs if');
+            userCardImgs.forEach( cardImg => {
+                //console.log('in foreach');
+                const imgItem = document.createElement('img');
+                imgItem.src = cardImg;
+                userCardDiv.append(imgItem);
+            })
+        }        
+    } else if (player === 'dealer') {
+        const dealerCardDiv = document.getElementById('dealerCards');
+        dealerCardDiv.innerHTML = '';
+        if (dealerCardImgs) { // userCardImgs.length > 0            
+            dealerCardImgs.forEach( cardImg => {                
+                const imgItem = document.createElement('img');
+                imgItem.src = playingCardBack;
+                dealerCardDiv.append(imgItem);
+            })
+        }      
+
+        
+        // if (!gameOver) { for each item in list, show image of a back of card }
+        // else { show cards }
+    }    
+}
+
 function calculateTotal(player) {
     // console.log('player in calculate total: ', player)
     let list;    
@@ -161,60 +209,62 @@ function calculateTotal(player) {
         } else {
             total += Number(list[i]);            
         }
-    // TODO: take care of aceCount
-    
-    if (player === 'user') {
-        document.getElementById('userTotal').innerHTML = total;
-    } else if (player === 'dealer') {
-        console.log('Dealer Total: ', total);
-    }
-    // return total;
+        // take care of aceCount
+        while (aceCount != 0) {
+            if (aceCount >= 1 && total > 10) {
+                total += 1; // ace is 1 point
+                aceCount -= 1;
+            } else if (aceCount === 1 && total === 10) {
+                total += 11; // ace is 11 points -> total = 21
+                aceCount -= 1;
+            } else if (aceCount === 2 && total === 9) {
+                total += 12; // first ace is 11 points, second ace 1 point -> total = 21
+                aceCount = 0;
+            } else if (aceCount === 3 && total === 8) {
+                total += 13; // first ace is 11 points, second and third ace 1 point each -> total = 21
+                aceCount = 0;
+            }  else if (aceCount === 4 && total === 7) {
+                total += 14; // first ace is 11 points, second, third, fourth ace 1 point each -> total = 21
+                aceCount = 0;
+            } else if (total < 10) {
+                total += 11; // ace is 11 points
+                aceCount -= 1;
+            }
+            } // end of while loop
+        } // end of for loop    
 
+    // display total
+    if (player === 'user') {
+        userTotal = total; // is this where I want this?
+        document.getElementById('userTotal').innerHTML = total;        
+    } else if (player === 'dealer') {
+        dealerTotal = total; // is this what I want this?
+        if (!gameOver) {
+            document.getElementById('dealerTotal').innerHTML = '?';
+            console.log('Dealer Total: ', total);
+        } else if (gameOver) {
+            document.getElementById('dealerTotal').innerHTML = total;
+        }        
     }
+
+    if (total >= 21) {
+        gameOver = true;
+    } // call gameEnd function?
+    console.log('Game Over: ', gameOver);
+
+
+}  // end of calculateTotal()
 
     // how will I handle Aces - they can be worth 1 or 11
     // if player total > 21, game ends and dealer wins
     // if player total = 21, game ends and player wins
     // logic for whether or not dealer draws
     // after dealer draws, same checks as above
+    // if player passes, check who is closer to 21
     // if gameOver, displayCards('dealer')
 
-}
 
-function displayCards(player) { 
-    //console.log('inside displayCards function')   ;
-    if (player === 'user') {        
-        const userCardDiv = document.getElementById('userCards');
-        userCardDiv.innerHTML = ''; // clear out display first
-        if (userCardImgs) { // userCardImgs.length > 0
-            //console.log('in userCardImgs if');
-            userCardImgs.forEach( cardImg => {
-                //console.log('in foreach');
-                const imgItem = document.createElement('img');
-                imgItem.src = cardImg;
-                userCardDiv.append(imgItem);
-            })
-        }        
-    } else if (player === 'dealer') {
-        const dealerCardDiv = document.getElementById('dealerCards');
-        dealerCardDiv.innerHTML = '';
-        if (dealerCardImgs) { // userCardImgs.length > 0
-            //console.log('in userCardImgs if');
-            dealerCardImgs.forEach( cardImg => {
-                //console.log('in foreach');
-                const imgItem = document.createElement('img');
-                imgItem.src = playingCardBack;
-                dealerCardDiv.append(imgItem);
-            })
-        }      
 
-        // clear out display first
-        // if (!gameOver) { for each item in list, show image of a back of card }
-        // else { show cards }
-    }
-
-    //cardImg.src = JSONdata.cards[0].image;
-}
 
 /*
 https://stackoverflow.com/questions/23815294/why-does-addeventlistener-fire-before-the-event-if-at-all

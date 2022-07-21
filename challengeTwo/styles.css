@@ -1,5 +1,25 @@
-#playingBoard {
-    display: flex;
+html {
+    box-sizing: border-box;
+    background-color: powderblue;
+}
+
+body {
+    max-width: 900px;
+    margin: auto;
+}
+
+#playingBoard div {
+    margin: auto;     
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+#startGameBtn {
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 img {
@@ -8,6 +28,33 @@ img {
     padding: 5px;
 }
 
-#userInfo {
+#startGameBtn {
+    display: block;
+}
+
+#drawBtn, #passBtn {
+    display: none;
+}
+
+#userInfo, #dealerInfo {    
+    background-color: rgb(195, 230, 230);
     min-width: 400px;
+    min-height: 300px;
+    margin: 10px;
+}
+#userInfo, #dealerInfo {
+    text-align: center;
+    
+}
+
+
+
+
+@media (min-width: 768px) {
+    #playingBoard {
+        display: flex;
+    }
+
+
+
 }

@@ -34,14 +34,17 @@ TODO:
 /6 - display player total
 /7 - console.log dealer's cards and total
 /8 - button to draw again
-9 - button to pass on draw (and initiate end of game)
-10 - after every draw, check if game is over (player either goes over 21 or passes)
+/9 - button to pass on draw 
+9b - pass -> and initiate end of game
+/10 - after every draw, check if game is over (player either goes over 21 or passes)
 10b - logic for if dealer draws again
 11 - when game over, display winner
 11b - also display the dealer cards and total
 12 - have option for a new game
 13 - use CSS transitions/animations somewhere (ideas: buttons, cards)
-
+14 - CSS notes:
+    - put space between draw and pass buttons
+    - show and hide buttons when needed (notes in main.js)
 ALSO:
 - add CSS to all weeks
 
