@@ -1,0 +1,13 @@
+#playingBoard {
+    display: flex;
+}
+
+img {
+    border-radius: 8px;
+    width: 100px;
+    padding: 5px;
+}
+
+#userInfo {
+    min-width: 400px;
+}

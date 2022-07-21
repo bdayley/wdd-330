@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
     <title>Variation of the Game "21"</title>
 </head>
 <body>
@@ -26,24 +27,27 @@
     </div>
 
     <!-- hide these divs until game starts -->
-    <div id="userInfo">
-        <p>Your Cards:</p>
-        <div id="userCards"></div>
-        
-        <p>Your Total:</p>            
-        <div id="userTotal"></div>
-
-        <button id="drawAgain">Draw Again</button>
-        <button id="pass">Pass</button>
-    </div>
-
-    <div id="dealerInfo">        
-        <p>Dealer Cards:</p>
-        <div id="dealerCards"></div>
-        
-        <p>Dealer Total:</p>
-        <div id="dealerTotal"></div>
-    </div>
+    <div id="playingBoard">
+        <div id="userInfo">
+            <p>Your Cards:</p>
+            <div id="userCards"></div>
+            
+            <p>Your Total:</p>            
+            <div id="userTotal"></div>
+    
+            <button id="drawBtn">Draw</button>
+            <button id="pass">Pass</button>
+        </div>
+    
+        <div id="dealerInfo">        
+            <p>Dealer Cards:</p>
+            <div id="dealerCards"></div>
+            
+            <p>Dealer Total:</p>
+            <div id="dealerTotal"></div>
+        </div>
+    </div> <!-- end of playingBoard div -->
+    
     <br>
     <script src="main.js"></script>
 </body>

@@ -25,21 +25,24 @@ const dealerPile = 'dealer';
 let dealerCardImgs = [];
 let dealerCards = [];
 
+const playingCardBack = '/images/playing-cards-back-delta-vector-2848246-2.jpg'
+
 // event listeners
 const startGameButton = document.querySelector('#startGame');
 startGameButton.addEventListener('click', function () { startGame(newDeckURL); });
 
-const drawAgainButton = document.querySelector('#drawAgain');
-drawAgainButton.addEventListener('click', function() { drawCard(userPile); })
+const drawButton = document.querySelector('#drawBtn');
+drawButton.addEventListener('click', function() { drawCard(userPile); })
 
 async function startGame(url) {
+    // TODO: hide startGameButton
     try {
         let response = await fetch(url);
         if (!response.ok) {
             throw Error(response.statusText);
         } else {
             let fetchJson = await response.json();
-            console.log('startGame function: ', fetchJson);
+            //console.log('startGame function: ', fetchJson);
             deck_id = fetchJson.deck_id;
             //console.log('inside function: ', deck_id)
 
@@ -62,7 +65,7 @@ async function drawCard(player) {
                 throw Error(response.statusText);
             } else {
                 let fetchJson = await response.json();
-                console.log('drawCard function: ', fetchJson);
+                //console.log('drawCard function: ', fetchJson);
 
                 let card = fetchJson.cards[0].value;
                 let suit = fetchJson.cards[0].suit;
@@ -77,21 +80,12 @@ async function drawCard(player) {
                     dealerCards.push(card);
                 }                
 
-                console.log('dealer card imgs: ', dealerCardImgs);
                 console.log('dealer cards values: ', dealerCards);
-                console.log('player card imgs: ', userCardImgs);
-                console.log('player cards values: ', userCards);                         
+                // console.log('player cards values: ', userCards);                         
                 
-                //console.log('card value: ', card);
-                //console.log('card suit: ', suit);
-                //console.log('card img: ', cardImage)
-
                 addToPile(player, card, suit);
-
                 displayCards(player);
-
-                // TODO: 
-                // calculateTotal()
+                calculateTotal(player);
             }
         } else {
             console.log('Wait a second and try again');
@@ -114,7 +108,7 @@ async function addToPile(player, card, suit) {
             throw Error(response.statusText);            
         } else {
             let fetchJson = await response.json();
-            console.log('addToPile function: ', fetchJson);
+            //console.log('addToPile function: ', fetchJson);
             //console.log('pile: ', fetchJson.piles);
             //listPile(player);
         }
@@ -149,6 +143,34 @@ async function listPile(pileName) {
 }
 
 function calculateTotal(player) {
+    // console.log('player in calculate total: ', player)
+    let list;    
+    if (player === 'user') {
+        list = userCards;
+    } else if (player === 'dealer') {
+        list = dealerCards;
+    }
+
+    let total = 0;
+    let aceCount = 0;
+    for (i in list) {        
+        if (list[i] === 'ACE') {
+            aceCount += 1;
+        } else if (list[i] === 'KING' || list[i] === 'QUEEN' || list[i] === 'JACK' || list[i] === 0) {
+            total += 10;                        
+        } else {
+            total += Number(list[i]);            
+        }
+    // TODO: take care of aceCount
+    
+    if (player === 'user') {
+        document.getElementById('userTotal').innerHTML = total;
+    } else if (player === 'dealer') {
+        console.log('Dealer Total: ', total);
+    }
+    // return total;
+
+    }
 
     // how will I handle Aces - they can be worth 1 or 11
     // if player total > 21, game ends and dealer wins
@@ -160,18 +182,32 @@ function calculateTotal(player) {
 }
 
 function displayCards(player) { 
-    console.log('inside displayCards function')   ;
-    if (player === 'user') {
+    //console.log('inside displayCards function')   ;
+    if (player === 'user') {        
         const userCardDiv = document.getElementById('userCards');
         userCardDiv.innerHTML = ''; // clear out display first
-        if (userCardImgs > 0) {
+        if (userCardImgs) { // userCardImgs.length > 0
+            //console.log('in userCardImgs if');
             userCardImgs.forEach( cardImg => {
+                //console.log('in foreach');
                 const imgItem = document.createElement('img');
                 imgItem.src = cardImg;
                 userCardDiv.append(imgItem);
             })
         }        
     } else if (player === 'dealer') {
+        const dealerCardDiv = document.getElementById('dealerCards');
+        dealerCardDiv.innerHTML = '';
+        if (dealerCardImgs) { // userCardImgs.length > 0
+            //console.log('in userCardImgs if');
+            dealerCardImgs.forEach( cardImg => {
+                //console.log('in foreach');
+                const imgItem = document.createElement('img');
+                imgItem.src = playingCardBack;
+                dealerCardDiv.append(imgItem);
+            })
+        }      
+
         // clear out display first
         // if (!gameOver) { for each item in list, show image of a back of card }
         // else { show cards }
