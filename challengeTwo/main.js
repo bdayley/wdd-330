@@ -17,15 +17,19 @@ let deck_id = '';
 let gameOver= false;
 
 const user = 'user';
+const userCardDiv = document.getElementById('userCards');
 let userCardImgs = [];
 let userCards = [];
 let userTotal = 0;
+let userPass = false;
 const userMessage = '... you!'
 
 const computer = 'computer';
+const computerCardDiv = document.getElementById('computerCards');
 let computerCardImgs = [];
 let computerCards = [];
 let computerTotal = 0;
+let computerPass = false;
 const computerMessage = '... the computer.';
 
 const tiedMessage = '... Well, we tied!';
@@ -42,17 +46,30 @@ drawBtn.addEventListener('click', function() { drawCard(user); })
 const passBtn = document.querySelector('#passBtn');
 passBtn.addEventListener('click', passProcess);
 
-async function startGame(url) {
-    // hide startGameBtn, show draw and pass buttons    
+const newGameBtn = document.querySelector('#newGameBtn');
+newGameBtn.addEventListener('click', function () { startGame(newDeckURL); });
+
+async function startGame(url) {      
     startGameBtn.style.display = 'none';
-    drawBtn.style.display = 'inline-block';
-    passBtn.style.display = 'inline-block';
-
-    // reset totals
+    newGameBtn.style.display = 'none';
+    passBtn.style.display = 'none'; // hide pass button til first user card drawn
+    drawBtn.style.display = 'inline-block';    
+    
+    // reset all
+    gameOver = false;
+    userCardImgs = [];
+    userCards = [];
     userTotal = 0;
-    computerTotal = 0;
+    userPass = false;
+    userCardDiv.innerHTML = '';
+    document.getElementById('userTotal').innerHTML = '';
 
-    // reset winner div
+    computerCardImgs = [];
+    computerCards = [];
+    computerTotal = 0;
+    computerPass = false;
+    computerCardDiv.innerHTML = '';
+    
     document.getElementById('winner').innerHTML = '';
 
     try {
@@ -61,7 +78,7 @@ async function startGame(url) {
             throw Error(response.statusText);
         } else {
             let fetchJson = await response.json();
-            //console.log('startGame function: ', fetchJson);
+            console.log('startGame function: ', fetchJson);
             deck_id = fetchJson.deck_id;
             //console.log('inside function: ', deck_id)
 
@@ -72,7 +89,7 @@ async function startGame(url) {
     } catch (error) {
         console.log('startGame() error: ', error);
     }
-}
+} // end of startGame()
 
 async function drawCard(player) {
     try {
@@ -100,8 +117,12 @@ async function drawCard(player) {
                 }                
 
                 console.log('computer cards values: ', computerCards);
-                // console.log('player cards values: ', userCards);                         
-                
+                // console.log('player cards values: ', userCards);
+
+                // show the pass button once the user has drawn the first card
+                if (player === user) {
+                    passBtn.style.display = 'inline-block';
+                }                
                 displayCards(player);
                 calculateTotal(player);
 
@@ -118,12 +139,11 @@ async function drawCard(player) {
     } catch (error) {
         console.log('drawPile() error: ', error);
     }
-}
+} // end of drawCard()
 
 function displayCards(player) { 
     //console.log('inside displayCards function')   ;
-    if (player === 'user') {        
-        const userCardDiv = document.getElementById('userCards');
+    if (player === 'user') {                
         userCardDiv.innerHTML = ''; // clear out display first
         if (userCardImgs) { // userCardImgs.length > 0
             //console.log('in userCardImgs if');
@@ -134,8 +154,7 @@ function displayCards(player) {
                 userCardDiv.append(imgItem);
             })
         }        
-    } else if (player === 'computer') {
-        const computerCardDiv = document.getElementById('computerCards');
+    } else if (player === 'computer') {        
         computerCardDiv.innerHTML = '';
         if (computerCardImgs) { // userCardImgs.length > 0            
             computerCardImgs.forEach( cardImg => {                
@@ -149,7 +168,7 @@ function displayCards(player) {
             })
         }
     }    
-}
+} // end of displayCards()
 
 function calculateTotal(player) {
     // console.log('player in calculate total: ', player)
@@ -197,11 +216,14 @@ function calculateTotal(player) {
 
     // display total
     if (player === 'user') {
-        userTotal = total; // is this where I want this?
+        userTotal = total;
         document.getElementById('userTotal').innerHTML = total;        
     } 
     if (player === 'computer') {
-        computerTotal = total; // is this what I want this?
+        computerTotal = total;
+        if (computerTotal > 11) {
+            computerPass = true; // put this here? allow player to keep going if needed
+        }
         if (!gameOver) {
             document.getElementById('computerTotal').innerHTML = '?';
             console.log('computer Total: ', total);
@@ -212,34 +234,27 @@ function calculateTotal(player) {
 
     if (!gameOver) {
         if (total >= totalNeeded) {
-            gameOver = true;
-            endGame(); // or inititiateGameEnd()
+            if (userPass || userTotal >= 21) { // allows user to keep going if dealer gets 21
+                endGame();
+            }            
         }        
-    }
-     
+    }     
     console.log('Game Over: ', gameOver);
-
 }  // end of calculateTotal()
 
 function passProcess() {
-    gameOver = true;
-    // check if computer should draw once more
+    userPass = true;
+    // check if computer should continue to draw
     while (computerTotal <= 11) {
         drawCard(computer);
     }
     endGame();
-}
-
-function initiateGameEnd() {
-    // TODO: if computer total = 21 and player hasn't passed, allow player to draw until passing
-}
+} // end of passProcess()
 
 function endGame() {
     gameOver = true;
     drawBtn.style.display = 'none';
     passBtn.style.display = 'none';
-
-    // if endGame is triggered by computer getting 21, player needs chance to draw one more time??
 
     calculateTotal(user);
     calculateTotal(computer);
@@ -269,8 +284,10 @@ function endGame() {
     }
 
     document.getElementById('winner').innerHTML = 'The winner is: ' + winner;
-     
-}
+
+    newGameBtn.style.display = 'block';     
+} // end of endGame()
+
 
 
 

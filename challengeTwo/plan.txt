@@ -40,8 +40,8 @@ TODO:
 /10b - logic for if computer draws again
 /11 - when game over, display winner
 /11b - also display the computer cards and total
-12 - have option for a new game
-13 - use CSS transitions/animations somewhere (ideas: buttons, cards)
+/12 - have option for a new game
+/13 - use CSS transitions/animations somewhere (ideas: buttons, cards)
 /14 - CSS notes:
     - put space between draw and pass buttons
     - show and hide buttons when needed (notes in main.js)

@@ -32,6 +32,10 @@ img {
     padding: 5px;
 }
 
+img:hover {
+    transform: scale(1.25)
+}
+
 button {
     margin: 5px;
     padding: 5px;
@@ -44,7 +48,7 @@ button {
     display: block;
 }
 
-#drawBtn, #passBtn {
+#drawBtn, #passBtn, #newGameBtn {
     display: none;
     margin: 20px;
 }
@@ -62,6 +66,10 @@ button {
 
 #userInfo, #computerInfo, #winner {
     text-align: center;   
+}
+
+#winner {
+    font-size: xx-large;
 }
 
 
