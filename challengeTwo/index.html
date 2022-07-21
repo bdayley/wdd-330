@@ -8,47 +8,55 @@
     <title>Variation of the Game "21"</title>
 </head>
 <body>
-    <h1>A Variation of the Game "21"</h1>
+    <div id="container">
+        <h1>A Variation of the Game "21"</h1>
     
-    <div id="rules">
-        <h2>Rules:</h2>
-        <ul>
-            <li></li>
-            <li></li>
-        </ul>
-    </div>
+        <div id="rules">
+            <h2>Rules:</h2>
+            <ul>            
+                <li>Get the closest to 21 without going over.</li>
+                <li>The computer will draw again if their total is 11 or less.</li>
+                <li>Choose to draw another card, or pass.</li>
+                <li>Game ends when you pass or your total is over 21.</li>
+                <li>The winner is the one whose sum of cards is the closest to 21 without going over.</li>            
 
-    <div id="start">
-        <button id="startGameBtn">Start Game</button>
-    </div>
-
-    <div id="winner">
-        <!-- nothing here until the end of a game -->
-    </div>
-
-    <!-- hide these divs until game starts?
-        * at least hide draw and pass buttons -->
-    <div id="playingBoard">
-        <div id="userInfo">
-            <button id="drawBtn">Draw</button>
-            <button id="passBtn">Pass</button>
-            
-            <p>Your Total:</p>            
-            <div id="userTotal"></div>  
-
-            <p>Your Cards:</p>
-            <div id="userCards"></div>           
+            </ul>
         </div>
+
+        <div id="start">
+            <button id="startGameBtn">Start Game</button>
+        </div>
+
+        <div id="winner">
+            <!-- nothing here until the end of a game -->
+        </div>
+        
+        <div id="playingBoard">
+            <div id="userInfo">              
+                <p>Your Total:</p>            
+                <div id="userTotal"></div>  
+
+                <p>Your Cards:</p>
+                <div id="userCards"></div>           
+            </div>
+
+            <div id="playBtns">
+                <button id="drawBtn">Draw</button>
+                <button id="passBtn">Pass</button>
+            </div>
+        
+            <div id="computerInfo">                               
+                <p>Computer Total:</p>
+                <div id="computerTotal"></div>
+
+                <p>Computer Cards:</p>
+                <div id="computerCards"></div>
+
+            </div>
+        </div> <!-- end of playingBoard div -->
+
+    </div> <!-- end of container div -->
     
-        <div id="dealerInfo">                               
-            <p>Dealer Total:</p>
-            <div id="dealerTotal"></div>
-
-            <p>Dealer Cards:</p>
-            <div id="dealerCards"></div>
-
-        </div>
-    </div> <!-- end of playingBoard div -->
     
     <br>
     <script src="main.js"></script>

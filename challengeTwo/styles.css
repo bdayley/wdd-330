@@ -1,11 +1,15 @@
 html {
-    box-sizing: border-box;
-    background-color: powderblue;
+    box-sizing: border-box;    
+    background-color: rgb(189, 229, 234);
 }
 
 body {
     max-width: 900px;
     margin: auto;
+}
+
+#container {
+    background-color: powderblue;
 }
 
 #playingBoard div {
@@ -28,26 +32,37 @@ img {
     padding: 5px;
 }
 
+button {
+    margin: 5px;
+    padding: 5px;
+    background-color: #245f92;
+    color: white;
+    border-radius: 3px;
+}
+
 #startGameBtn {
     display: block;
 }
 
 #drawBtn, #passBtn {
     display: none;
+    margin: 20px;
 }
 
-#userInfo, #dealerInfo {    
-    background-color: rgb(195, 230, 230);
+#userInfo, #computerInfo {    
+    background-color: rgb(237, 250, 250);
     min-width: 400px;
     min-height: 300px;
     margin: 10px;
 }
-#userInfo, #dealerInfo {
+
+#playBtns {
     text-align: center;
-    
 }
 
-
+#userInfo, #computerInfo, #winner {
+    text-align: center;   
+}
 
 
 @media (min-width: 768px) {
@@ -55,6 +70,17 @@ img {
         display: flex;
     }
 
+    div#rules {        
+        margin: auto;
+        width: 600px;
+    }
 
+    #userInfo {
+        margin-right: 5px;
+    }
+    
+    #computerInfo {
+        margin-left: 5px;
+    }
 
 }

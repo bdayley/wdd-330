@@ -11,21 +11,24 @@ URLS:
 // list pile: "https://www.deckofcardsapi.com/api/deck/<<deck_id>>/pile/<<pile_name>>/list/"
 */
 
+const totalNeeded = 21;
 const newDeckURL = 'https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1';
 let deck_id = '';
 let gameOver= false;
 
-//const userCardDiv = document.getElementById('userCards');
-const userPile = 'user';
+const user = 'user';
 let userCardImgs = [];
 let userCards = [];
 let userTotal = 0;
+const userMessage = '... you!'
 
-const dealerCardDiv = document.getElementById('dealerCards');
-const dealerPile = 'dealer';
-let dealerCardImgs = [];
-let dealerCards = [];
-let dealerTotal = 0;
+const computer = 'computer';
+let computerCardImgs = [];
+let computerCards = [];
+let computerTotal = 0;
+const computerMessage = '... the computer.';
+
+const tiedMessage = '... Well, we tied!';
 
 const playingCardBack = '/images/playing-cards-back-delta-vector-2848246-2.jpg'
 
@@ -34,11 +37,10 @@ const startGameBtn = document.querySelector('#startGameBtn');
 startGameBtn.addEventListener('click', function () { startGame(newDeckURL); });
 
 const drawBtn = document.querySelector('#drawBtn');
-drawBtn.addEventListener('click', function() { drawCard(userPile); })
+drawBtn.addEventListener('click', function() { drawCard(user); })
 
 const passBtn = document.querySelector('#passBtn');
-//passBtn.addEventListener('click', endGame);
-// TODO implement endGame function (or however the game will end...)
+passBtn.addEventListener('click', passProcess);
 
 async function startGame(url) {
     // hide startGameBtn, show draw and pass buttons    
@@ -48,7 +50,10 @@ async function startGame(url) {
 
     // reset totals
     userTotal = 0;
-    dealerTotal = 0;
+    computerTotal = 0;
+
+    // reset winner div
+    document.getElementById('winner').innerHTML = '';
 
     try {
         let response = await fetch(url);
@@ -60,8 +65,8 @@ async function startGame(url) {
             deck_id = fetchJson.deck_id;
             //console.log('inside function: ', deck_id)
 
-            // games starts with the dealer drawing a card
-            drawCard(dealerPile);
+            // games starts with the computer drawing a card
+            drawCard(computer);
         }
 
     } catch (error) {
@@ -89,19 +94,21 @@ async function drawCard(player) {
                 if (player === 'user') {
                     userCardImgs.push(cardImage);
                     userCards.push(card);
-                } else if (player === 'dealer') {
-                    dealerCardImgs.push(cardImage);
-                    dealerCards.push(card);
+                } else if (player === 'computer') {
+                    computerCardImgs.push(cardImage);
+                    computerCards.push(card);
                 }                
 
-                console.log('dealer cards values: ', dealerCards);
+                console.log('computer cards values: ', computerCards);
                 // console.log('player cards values: ', userCards);                         
                 
-                addToPile(player, card, suit); // might not use this
                 displayCards(player);
                 calculateTotal(player);
 
-                // check if dealer needs to draw here??
+                // check if computer needs to draw here
+                if (player === 'user' && computerTotal <= 11) {
+                    drawCard(computer);
+                }
 
             }
         } else {
@@ -110,52 +117,6 @@ async function drawCard(player) {
         
     } catch (error) {
         console.log('drawPile() error: ', error);
-    }
-}
-
-// might not use this
-async function addToPile(player, card, suit) {
-    // TODO: add logic for who is current player (ie which pile to add to)
-       
-    try {
-        // URL exampe: "https://www.deckofcardsapi.com/api/deck/<<deck_id>>/pile/<<pile_name>>/add/?cards=AS,2S"
-        let url = 'https://www.deckofcardsapi.com/api/deck/' + deck_id + '/pile/' + player + '/add/?cards=' + card[0] + suit[0];
-        let response = await fetch(url);
-        if(!response.ok) {
-            throw Error(response.statusText);            
-        } else {
-            let fetchJson = await response.json();
-            //console.log('addToPile function: ', fetchJson);
-            //console.log('pile: ', fetchJson.piles);
-            //listPile(player);
-        }
-    } catch (error) {
-        console.log('addToPile() error: ', error);        
-    }
-
-}
-
-// Maybe won't use this? If so, probably don't need addToPile function either
-async function listPile(pileName) {
-    try {
-        // URL example: "https://www.deckofcardsapi.com/api/deck/<<deck_id>>/pile/<<pile_name>>/list/"
-        let url = 'https://www.deckofcardsapi.com/api/deck/' + deck_id + '/pile/' + pileName + '/list/';
-        let response = await fetch(url);
-        if(!response.ok) {
-            throw Error(response.statusText);
-        } else {
-            let fetchJson = await response.json();
-            console.log('listPile function: ', pileName + ' ' + fetchJson);
-            console.log('piles: ', fetchJson.piles);
-            console.log('player pile: ', fetchJson.piles.player);
-            console.log('player cards: ', fetchJson.piles.player.cards);
-
-
-        }
-
-    } catch (error) {
-        console.log('listPile() error:', error)
-
     }
 }
 
@@ -173,20 +134,20 @@ function displayCards(player) {
                 userCardDiv.append(imgItem);
             })
         }        
-    } else if (player === 'dealer') {
-        const dealerCardDiv = document.getElementById('dealerCards');
-        dealerCardDiv.innerHTML = '';
-        if (dealerCardImgs) { // userCardImgs.length > 0            
-            dealerCardImgs.forEach( cardImg => {                
+    } else if (player === 'computer') {
+        const computerCardDiv = document.getElementById('computerCards');
+        computerCardDiv.innerHTML = '';
+        if (computerCardImgs) { // userCardImgs.length > 0            
+            computerCardImgs.forEach( cardImg => {                
                 const imgItem = document.createElement('img');
-                imgItem.src = playingCardBack;
-                dealerCardDiv.append(imgItem);
+                if (!gameOver) {
+                    imgItem.src = playingCardBack;                    
+                } else {                    
+                    imgItem.src = cardImg;
+                }
+                computerCardDiv.append(imgItem);                
             })
-        }      
-
-        
-        // if (!gameOver) { for each item in list, show image of a back of card }
-        // else { show cards }
+        }
     }    
 }
 
@@ -195,8 +156,8 @@ function calculateTotal(player) {
     let list;    
     if (player === 'user') {
         list = userCards;
-    } else if (player === 'dealer') {
-        list = dealerCards;
+    } else if (player === 'computer') {
+        list = computerCards;
     }
 
     let total = 0;
@@ -209,60 +170,107 @@ function calculateTotal(player) {
         } else {
             total += Number(list[i]);            
         }
-        // take care of aceCount
-        while (aceCount != 0) {
-            if (aceCount >= 1 && total > 10) {
-                total += 1; // ace is 1 point
-                aceCount -= 1;
-            } else if (aceCount === 1 && total === 10) {
-                total += 11; // ace is 11 points -> total = 21
-                aceCount -= 1;
-            } else if (aceCount === 2 && total === 9) {
-                total += 12; // first ace is 11 points, second ace 1 point -> total = 21
-                aceCount = 0;
-            } else if (aceCount === 3 && total === 8) {
-                total += 13; // first ace is 11 points, second and third ace 1 point each -> total = 21
-                aceCount = 0;
-            }  else if (aceCount === 4 && total === 7) {
-                total += 14; // first ace is 11 points, second, third, fourth ace 1 point each -> total = 21
-                aceCount = 0;
-            } else if (total < 10) {
-                total += 11; // ace is 11 points
-                aceCount -= 1;
-            }
-            } // end of while loop
-        } // end of for loop    
+    } // end of for loop
+    
+    // take care of aceCount
+    while (aceCount != 0) {
+        if (aceCount >= 1 && total > 10) {
+            total += 1; // ace is 1 point
+            aceCount -= 1;
+        } else if (aceCount === 1 && total === 10) {
+            total += 11; // ace is 11 points -> total = 21
+            aceCount -= 1;
+        } else if (aceCount === 2 && total === 9) {
+            total += 12; // first ace is 11 points, second ace 1 point -> total = 21
+            aceCount = 0;
+        } else if (aceCount === 3 && total === 8) {
+            total += 13; // first ace is 11 points, second and third ace 1 point each -> total = 21
+            aceCount = 0;
+        }  else if (aceCount === 4 && total === 7) {
+            total += 14; // first ace is 11 points, second, third, fourth ace 1 point each -> total = 21
+            aceCount = 0;
+        } else if (total < 10) {
+            total += 11; // ace is 11 points
+            aceCount -= 1;
+        }
+    } // end of while loop
 
     // display total
     if (player === 'user') {
         userTotal = total; // is this where I want this?
         document.getElementById('userTotal').innerHTML = total;        
-    } else if (player === 'dealer') {
-        dealerTotal = total; // is this what I want this?
+    } 
+    if (player === 'computer') {
+        computerTotal = total; // is this what I want this?
         if (!gameOver) {
-            document.getElementById('dealerTotal').innerHTML = '?';
-            console.log('Dealer Total: ', total);
-        } else if (gameOver) {
-            document.getElementById('dealerTotal').innerHTML = total;
+            document.getElementById('computerTotal').innerHTML = '?';
+            console.log('computer Total: ', total);
+        } else if (gameOver) {            
+            document.getElementById('computerTotal').innerHTML = total;
         }        
     }
 
-    if (total >= 21) {
-        gameOver = true;
-    } // call gameEnd function?
+    if (!gameOver) {
+        if (total >= totalNeeded) {
+            gameOver = true;
+            endGame(); // or inititiateGameEnd()
+        }        
+    }
+     
     console.log('Game Over: ', gameOver);
-
 
 }  // end of calculateTotal()
 
-    // how will I handle Aces - they can be worth 1 or 11
-    // if player total > 21, game ends and dealer wins
-    // if player total = 21, game ends and player wins
-    // logic for whether or not dealer draws
-    // after dealer draws, same checks as above
-    // if player passes, check who is closer to 21
-    // if gameOver, displayCards('dealer')
+function passProcess() {
+    gameOver = true;
+    // check if computer should draw once more
+    while (computerTotal <= 11) {
+        drawCard(computer);
+    }
+    endGame();
+}
 
+function initiateGameEnd() {
+    // TODO: if computer total = 21 and player hasn't passed, allow player to draw until passing
+}
+
+function endGame() {
+    gameOver = true;
+    drawBtn.style.display = 'none';
+    passBtn.style.display = 'none';
+
+    // if endGame is triggered by computer getting 21, player needs chance to draw one more time??
+
+    calculateTotal(user);
+    calculateTotal(computer);
+    displayCards(user);
+    displayCards(computer);
+
+    // determine winner    
+    let winner = '';
+    if (userTotal === totalNeeded && computerTotal === totalNeeded) {
+        winner = tiedMessage;
+    } else if (userTotal === totalNeeded) {
+        winner = userMessage;
+    } else if (computerTotal === totalNeeded) {
+        winner = computerMessage;
+    } else if (userTotal > totalNeeded) {
+        winner = computerMessage;
+    } else if (userTotal < totalNeeded && computerTotal < totalNeeded) {
+        let userDiff = totalNeeded - userTotal;
+        let computerDiff = totalNeeded - computerTotal;
+        if (userDiff === computerDiff) {
+            winner = tiedMessage;
+        } else if (userDiff < computerDiff) {
+            winner = userMessage;            
+        } else {
+            winner = computerMessage;
+        }
+    }
+
+    document.getElementById('winner').innerHTML = 'The winner is: ' + winner;
+     
+}
 
 
 

@@ -3,7 +3,7 @@ PROPOSAL:
 Deck of Cards API – 21 game variation
 
 For the block 2 challenge, I'm going to use the Deck of Cards API and create a version of the game 21. 
-The dealer (computer) and the player will each be dealt 2 cards. The dealer will draw again if their 
+The computer (computer) and the player will each be dealt 2 cards. The computer will draw again if their 
 total is 11 or less. The player will choose if they draw again. After drawing, if the player total is 
 over 21, they lose. The play continues until the player decides to stop. The winner is the one whose 
 cards sum is closest to 21, without going over.
@@ -20,7 +20,7 @@ calculateTotal
 
 newGame
 
-For testing, the dealer’s cards & total will be shown, or at least logged in the console.
+For testing, the computer’s cards & total will be shown, or at least logged in the console.
 
 ---------
 
@@ -32,17 +32,17 @@ TODO:
 /4 - calculate total of piles
 /5 - display player cards
 /6 - display player total
-/7 - console.log dealer's cards and total
+/7 - console.log computer's cards and total
 /8 - button to draw again
 /9 - button to pass on draw 
-9b - pass -> and initiate end of game
+/9b - pass -> and initiate end of game
 /10 - after every draw, check if game is over (player either goes over 21 or passes)
-10b - logic for if dealer draws again
-11 - when game over, display winner
-11b - also display the dealer cards and total
+/10b - logic for if computer draws again
+/11 - when game over, display winner
+/11b - also display the computer cards and total
 12 - have option for a new game
 13 - use CSS transitions/animations somewhere (ideas: buttons, cards)
-14 - CSS notes:
+/14 - CSS notes:
     - put space between draw and pass buttons
     - show and hide buttons when needed (notes in main.js)
 ALSO:
