@@ -34,7 +34,7 @@ const computerMessage = '... the computer.';
 
 const tiedMessage = '... Well, we tied!';
 
-const playingCardBack = '/images/playing-cards-back-delta-vector-2848246-2.jpg'
+const playingCardBack = 'https://deckofcardsapi.com/static/img/back.png';
 
 // event listeners
 const startGameBtn = document.querySelector('#startGameBtn');
@@ -292,6 +292,8 @@ function endGame() {
 
 
 /*
+https://github.com/crobertsbmw/deckofcards
+
 https://stackoverflow.com/questions/23815294/why-does-addeventlistener-fire-before-the-event-if-at-all
 
 https://stackoverflow.com/questions/2373995/javascript-addeventlistener-event-fires-on-page-load
