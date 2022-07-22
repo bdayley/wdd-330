@@ -5,75 +5,80 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WDD330 Week 3</title>
+    <link rel="stylesheet" href="/style.css">
+    
 </head>
 <body>
-    <h1>Week 3 Notes</h1>
-    <h2>Javascript: Novice to Ninja</h2>
-    <h3>Chapter 5 - Objects</h3>
-    <ul>
-        <li>
-            All objects are mutable at any time when a program is running. This means that 
-            its properties and methods can be changed or removed, and new properties and 
-            methods can be added to the object, even if it was declared using const.
-        </li>
-        <li>
-            Objects can inherit properties from other objects, so all objects have a method 
-            called hasOwnProperty(). This can be used to check whether an object has a property 
-            that is its own, rather than one that has been inherited from another object
-        </li>
-        <li>
-            Random number, use floor() to get integer: Math.floor(n * Math.random());
-        </li>
-    </ul>
+    <header>
+        Portfolio for WDD-330
+    </header>
+    <div id="container">
+        <a class='homeAnchor' href='/index.html' title='Back to home page'>Home</a>
+        <h1>Week 3 Notes</h1>
+        <h2>Javascript: Novice to Ninja</h2>
+        <h3>Chapter 5 - Objects</h3>
+        <ul>
+            <li>
+                All objects are mutable at any time when a program is running. This means that 
+                its properties and methods can be changed or removed, and new properties and 
+                methods can be added to the object, even if it was declared using const.
+            </li>
+            <li>
+                Objects can inherit properties from other objects, so all objects have a method 
+                called hasOwnProperty(). This can be used to check whether an object has a property 
+                that is its own, rather than one that has been inherited from another object
+            </li>
+            <li>
+                Random number, use floor() to get integer: Math.floor(n * Math.random());
+            </li>
+        </ul>
 
-    <h3>Chapter 6 - The Document Object Model</h3>
-    <ul>
-        <li>
-            The DOM is not actually part of JavaScript because it is language agnostic 
-            (although JavaScript is, by far, the language most commonly used with it). 
-            This means it can be used in any programming language, not just JavaScript. 
-            We can use JavaScript to access and modify different parts of a web page 
-            using a special built-in object called document
-        </li>
-        <li>
-            The replaceChild() method can be used to replace one node with another. It’s 
-            called on the parent node and has two parameters: the new node and the node 
-            that is to be replaced.
-        </li>
-        <li>
-            Any CSS property names that are separated by dashes must be written in camelCase 
-            notation, so the dash is removed and the next letter is capitalized because dashes 
-            are not legal characters in property names.
-        </li>
-    </ul>
+        <h3>Chapter 6 - The Document Object Model</h3>
+        <ul>
+            <li>
+                The DOM is not actually part of JavaScript because it is language agnostic 
+                (although JavaScript is, by far, the language most commonly used with it). 
+                This means it can be used in any programming language, not just JavaScript. 
+                We can use JavaScript to access and modify different parts of a web page 
+                using a special built-in object called document
+            </li>
+            <li>
+                The replaceChild() method can be used to replace one node with another. It’s 
+                called on the parent node and has two parameters: the new node and the node 
+                that is to be replaced.
+            </li>
+            <li>
+                Any CSS property names that are separated by dashes must be written in camelCase 
+                notation, so the dash is removed and the next letter is capitalized because dashes 
+                are not legal characters in property names.
+            </li>
+        </ul>
 
-    <h3>Chapter 7 - Events</h3>
-    <ul>
-        <li>
-            Note that the parentheses are not placed after the function when it's used as the 
-            argument to an event listener; otherwise, the function will actually be called when 
-            the event listener is set, instead of when the event happens!
-        </li>
-        <li>
-            Whenever an event handler is triggered by an event, the callback function is called. 
-            This function is automatically passed an event object as a parameter that contains 
-            information about the event.
-        </li>
-        <li>
-            The target property returns a reference to the node that fired the event. 
-        </li>
-        <li>
-            To understand the differences in these events, it is important to distinguish between 
-            a physical key on the keyboard and a character that appears on the screen. The keydown 
-            event is the action of pressing a key, whereas the keypress event is the action of a 
-            character being typed on the screen.
-        </li>
-    </ul>
-    
-    <h4>Questions</h4>
-    <ul>
-        <li></li>
-    </ul>
-    
+        <h3>Chapter 7 - Events</h3>
+        <ul>
+            <li>
+                Note that the parentheses are not placed after the function when it's used as the 
+                argument to an event listener; otherwise, the function will actually be called when 
+                the event listener is set, instead of when the event happens!
+            </li>
+            <li>
+                Whenever an event handler is triggered by an event, the callback function is called. 
+                This function is automatically passed an event object as a parameter that contains 
+                information about the event.
+            </li>
+            <li>
+                The target property returns a reference to the node that fired the event. 
+            </li>
+            <li>
+                To understand the differences in these events, it is important to distinguish between 
+                a physical key on the keyboard and a character that appears on the screen. The keydown 
+                event is the action of pressing a key, whereas the keypress event is the action of a 
+                character being typed on the screen.
+            </li>
+        </ul>        
+    </div>
+    <footer>
+        Summer 2022
+    </footer>
 </body>
 </html>

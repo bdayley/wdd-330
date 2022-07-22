@@ -6,90 +6,96 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <script src="main.js" defer></script> -->
     <title>WDD 330 - Week 7</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <h1>Week 7</h1>
-    <h2>JavaScript: Novice to Ninja</h2>
-    <h3>Future Functions</h3>    
+    <header>
+        Portfolio for WDD-330
+    </header>
+    <div id="container">
+        <a class='homeAnchor' href='/index.html' title='Back to home page'>Home</a>
+        <h1>Week 7</h1>
+        <h2>JavaScript: Novice to Ninja</h2>
+        <h3>Future Functions</h3>    
 
-    <h4>Function Properties and Methods</h4>
-    <ul>
-        <li>functions are first-class objects so they can have properties and methods themselves</li>
-        <li>the call method can be used to set the value of this inside a functions to an object that is provided as the first argument</li>
-        <li>the call and apply methods allow generalized functions to be written that are not tied to specific objects by being objects of that object</li>
-        <li>memoization (caching)</li>
-    </ul>
-    
-    <h4>Immediately Invoked Function Expressions</h4>
-    <ul>
-        <li>invoked as soon as it is defined</li>
-        <li>the function has to be made into an expression (place the whole declaration inside parantheses
-            and then place parentheses after it
-        </li>
-        <li>this can be used to enclose a block of code inside its own private scope so it doesn't interfere
-            with any other part of the program
-        </li>
-    </ul>
+        <h4>Function Properties and Methods</h4>
+        <ul>
+            <li>functions are first-class objects so they can have properties and methods themselves</li>
+            <li>the call method can be used to set the value of this inside a functions to an object that is provided as the first argument</li>
+            <li>the call and apply methods allow generalized functions to be written that are not tied to specific objects by being objects of that object</li>
+            <li>memoization (caching)</li>
+        </ul>
+        
+        <h4>Immediately Invoked Function Expressions</h4>
+        <ul>
+            <li>invoked as soon as it is defined</li>
+            <li>the function has to be made into an expression (place the whole declaration inside parantheses
+                and then place parentheses after it
+            </li>
+            <li>this can be used to enclose a block of code inside its own private scope so it doesn't interfere
+                with any other part of the program
+            </li>
+        </ul>
 
-    <h4>Functions that Define and Rewrite Themselves</h4>
-    <ul>
-        <li>a function can also define itself and redefine itself</li>
-        <li>to do so, assign an anonymous function to a variable with the same name as the function</li>
-        <li>this is called the Lazy Definition Pattern</li>
-        <li>can be used when some initilization is required the first time it's called</li>
-    </ul>
+        <h4>Functions that Define and Rewrite Themselves</h4>
+        <ul>
+            <li>a function can also define itself and redefine itself</li>
+            <li>to do so, assign an anonymous function to a variable with the same name as the function</li>
+            <li>this is called the Lazy Definition Pattern</li>
+            <li>can be used when some initilization is required the first time it's called</li>
+        </ul>
 
-    <h4>Callbacks</h4>
-    <ul>
-        <li>the setTimeout method accept a callback to a function as its first parameter
-            and a number of milliseconds as its second parameter
-        </li>
-        <li>promises simplify the callback promise</li>
-        <li>when a promise is settled, you can use the then method to deal with the outcome</li>
-        <li>the catch method can be used to specify what happens if it fails</li>
-        <li>async functions allow you to write asynchronous code as if it was synchronous</li>
-        <li>functions can return a function</li>
-        <li>to use a returned function, it needs to be assigned to a variable</li>
-    </ul>
+        <h4>Callbacks</h4>
+        <ul>
+            <li>the setTimeout method accept a callback to a function as its first parameter
+                and a number of milliseconds as its second parameter
+            </li>
+            <li>promises simplify the callback promise</li>
+            <li>when a promise is settled, you can use the then method to deal with the outcome</li>
+            <li>the catch method can be used to specify what happens if it fails</li>
+            <li>async functions allow you to write asynchronous code as if it was synchronous</li>
+            <li>functions can return a function</li>
+            <li>to use a returned function, it needs to be assigned to a variable</li>
+        </ul>
 
-    <h4>Closures</h4>
-    <ul>
-        <li>a closure is a reference to a variable that was created inside the scope of another 
-            function, but is then kept alive and used in another part of the program
-        </li>
-        <li>a closure is formed when the inner function is returned by the outer function</li>
-    </ul>
+        <h4>Closures</h4>
+        <ul>
+            <li>a closure is a reference to a variable that was created inside the scope of another 
+                function, but is then kept alive and used in another part of the program
+            </li>
+            <li>a closure is formed when the inner function is returned by the outer function</li>
+        </ul>
 
-    <h4>Functional Programming</h4>
-    <ul>
-        <li>pure functions help make functional programming more concise and predictable than in other programming styles</li>
-        <li>functions should perform a single task</li>
-        <li>high-order functions are functions that accept another functions as an argument, 
-            or return another function as a result, or both</li>
-        <li>currying is a process that involves the partial application of functions</li>
-        <li>currying allows you to turn a single function into a series of functions instead</li>
-    </ul>
-    
+        <h4>Functional Programming</h4>
+        <ul>
+            <li>pure functions help make functional programming more concise and predictable than in other programming styles</li>
+            <li>functions should perform a single task</li>
+            <li>high-order functions are functions that accept another functions as an argument, 
+                or return another function as a result, or both</li>
+            <li>currying is a process that involves the partial application of functions</li>
+            <li>currying allows you to turn a single function into a series of functions instead</li>
+        </ul>
+        
 
-    <h3>Ajax</h3>
-    <h4>The Fetch API</h4>
-    <ul>
-        <li>the Fetch API superseded XMLHttpRequest</li>
-        <li>fetch returns a promise</li>
-        <li>JSON is the most common format for AJAX responses</li>
-        <li>others are text and blob</li>
-        <li>you can use Headers, Request and Response Objects</li>        
-    </ul>
-    <h4>FormData</h4>
-    <ul>
-        <li>the Fetch API includes the FormData interface, which makes it much easier to 
-            submit informations in forms using Ajax
-        </li>
-        <li>this interface really helps when a form contains files to upload</li>
-    </ul>
-   
-
-
-    
+        <h3>Ajax</h3>
+        <h4>The Fetch API</h4>
+        <ul>
+            <li>the Fetch API superseded XMLHttpRequest</li>
+            <li>fetch returns a promise</li>
+            <li>JSON is the most common format for AJAX responses</li>
+            <li>others are text and blob</li>
+            <li>you can use Headers, Request and Response Objects</li>        
+        </ul>
+        <h4>FormData</h4>
+        <ul>
+            <li>the Fetch API includes the FormData interface, which makes it much easier to 
+                submit informations in forms using Ajax
+            </li>
+            <li>this interface really helps when a form contains files to upload</li>
+        </ul>
+    </div>
+    <footer>
+        Summer 2022
+    </footer>    
 </body>
 </html>

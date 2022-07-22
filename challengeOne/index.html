@@ -6,28 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ToDo</title>
     <script type="module" src="js/todos.js"></script>
+    <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Todos</h1>
-        <div class="todos-wrapper">
-            <div id="todos">
+    <header>
+        Portfolio for WDD-330
+    </header>
+    <div id="container">
+        <a class='homeAnchor' href='/index.html' title='Back to home page'>Home</a>
+        <div class="container1">
+            <h1>Todos</h1>
+            <div class="todos-wrapper">
+                <div id="todos">
 
+                </div>
+                <div class="todo-filters">
+                    <span id="itemsLeft">items left</span>
+                    <button id="allFilter">All</button>
+                    <button id="activeFilter">Active</button>
+                    <button id="completedFilter">Completed</button>
+                </div>
             </div>
-            <div class="todo-filters">
-                <span id="itemsLeft">items left</span>
-                <button id="allFilter">All</button>
-                <button id="activeFilter">Active</button>
-                <button id="completedFilter">Completed</button>
-            </div>
-        </div>
 
-        <div id="add-todo-wrapper">
-            <input type="text" id="todoInput">
-            <button id="addBtn">Add</button>
+            <div id="add-todo-wrapper">
+                <input type="text" id="todoInput">
+                <button id="addBtn">Add</button>
+            </div>
         </div>
     </div>
+    <footer>
+        Summer 2022
+    </footer>
     
     
 </body>

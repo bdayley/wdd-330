@@ -5,60 +5,69 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WDD 330 - Week 9</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="styles.css">    
 </head>
 <body>
-    <h1>Week 9</h1>
-    <h2>JavaScript: Novice to Ninja</h2>
-    <h3>The Window Object</h3>
-    <ul>
-        <li>every javascript environment has a global object</li>       
-    </ul>
+    <header>
+        Portfolio for WDD-330
+    </header>
+    <div id="container">
+        <a class='homeAnchor' href='/index.html' title='Back to home page'>Home</a>
+        <h1>Week 9</h1>
+        <h2>JavaScript: Novice to Ninja</h2>
+        <h3>The Window Object</h3>
+        <ul>
+            <li>every javascript environment has a global object</li>       
+        </ul>
 
-    <h4>The Browser Object Model</h4>
-    <ul>
-        <li>the Browser Object Model is a collection of properties and methods that contain information about the browser and computer screens</li>
-        <li>JavaScript can be run in different environments; the BOM only makes sense in a browser environment</li>
-    </ul>
+        <h4>The Browser Object Model</h4>
+        <ul>
+            <li>the Browser Object Model is a collection of properties and methods that contain information about the browser and computer screens</li>
+            <li>JavaScript can be run in different environments; the BOM only makes sense in a browser environment</li>
+        </ul>
 
-    <h4>The Document Object</h4>
-    <ul>
-        <li>cookies are small files that are saved locally on a user's computer</li>
-        <li>the document.cookie property acts like a speical type of string</li>
-        <li>assigning another cookie to it won't overwrite the entire property, it will append it to the end of the string</li>
-    </ul>
+        <h4>The Document Object</h4>
+        <ul>
+            <li>cookies are small files that are saved locally on a user's computer</li>
+            <li>the document.cookie property acts like a speical type of string</li>
+            <li>assigning another cookie to it won't overwrite the entire property, it will append it to the end of the string</li>
+        </ul>
 
-    <h4>Timing Functions</h4>
-    <ul>
-        <li>The window object provides some useful methods for scheduling the exectuion of a function, 
-            and for repeatedly executing functions at regular intervals.</li>
-        <li>The window.setTimeout() method accepts a callback to a function as its first parameter
-            and a number of milliseconds as its second parameter.
-        </li>
-        <li>The window.setInterval() method works in a similar way, except it repeatedly invokes the 
-            callback function every given number of milliseconds.
-        </li>
-        <li>Be careful using this with either method, as the binding of this is set to the window object,
-            rather than the method's object.
-        </li>
-        <li>setTimeout() and setInterval() methods can be used to animate elements of a webpage</li>
-        <div id="square"></div>
-        <li>requestAnimationFrame makes it smoother</li>
-        <div id="square2"></div>
-        <li>Generally it is better to use CSS for any animation effects.</li>
-    </ul>
+        <h4>Timing Functions</h4>
+        <ul>
+            <li>The window object provides some useful methods for scheduling the exectuion of a function, 
+                and for repeatedly executing functions at regular intervals.</li>
+            <li>The window.setTimeout() method accepts a callback to a function as its first parameter
+                and a number of milliseconds as its second parameter.
+            </li>
+            <li>The window.setInterval() method works in a similar way, except it repeatedly invokes the 
+                callback function every given number of milliseconds.
+            </li>
+            <li>Be careful using this with either method, as the binding of this is set to the window object,
+                rather than the method's object.
+            </li>
+            <li>setTimeout() and setInterval() methods can be used to animate elements of a webpage</li>
+            <div id="square"></div>
+            <li>requestAnimationFrame makes it smoother</li>
+            <div id="square2"></div>
+            <li>Generally it is better to use CSS for any animation effects.</li>
+        </ul>
 
-    <h3>HTML5 APIs</h3>
-    <h4>The data- Attribute</h4>
-    <ul>
-        <li>The data- attribute is a way of embedding data in a web page using custom attributes that are ignoted by the browser.</li>
-        <li>They're also private to the page. They're sole purpose is to be used by a JavaScript program.</li>
-        <li>If a data- attribute's name contains hyphens, they are replaced with camel-case notation (data-max-lenghth -> dataset.maxLength)</li>
-    </ul>
-    <h4>Other API's</h4>
-    <a href="./factors.html" target="_blank">Web Worker Example</a>
-
-
+        <h3>HTML5 APIs</h3>
+        <h4>The data- Attribute</h4>
+        <ul>
+            <li>The data- attribute is a way of embedding data in a web page using custom attributes that are ignoted by the browser.</li>
+            <li>They're also private to the page. They're sole purpose is to be used by a JavaScript program.</li>
+            <li>If a data- attribute's name contains hyphens, they are replaced with camel-case notation (data-max-lenghth -> dataset.maxLength)</li>
+        </ul>
+        <h4>Other API's</h4>
+        <a href="./factors.html"  >Web Worker Example</a>
+    </div>
+    <footer>
+        Summer 2022
+    </footer>
+    
     <script src="index.js"></script>
 </body>
 </html>

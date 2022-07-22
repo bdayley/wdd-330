@@ -16,7 +16,7 @@ form.addEventListener('submit', search, false);
 
 function search() {
     alert(`You Searched for: ${input.value}`);
-    event.preventDefault;
+    event.preventDefault();
 }
 
 /*
