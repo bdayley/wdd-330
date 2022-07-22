@@ -33,8 +33,8 @@ let computerPass = false;
 const computerMessage = '... the computer.';
 
 const tiedMessage = '... Well, we tied!';
-
 const playingCardBack = 'https://deckofcardsapi.com/static/img/back.png';
+const rulesDiv = document.getElementById('rules');
 
 // event listeners
 const startGameBtn = document.querySelector('#startGameBtn');
@@ -49,11 +49,25 @@ passBtn.addEventListener('click', passProcess);
 const newGameBtn = document.querySelector('#newGameBtn');
 newGameBtn.addEventListener('click', function () { startGame(newDeckURL); });
 
+const hideRulesBtn = document.querySelector('#hideRulesBtn');
+hideRulesBtn.addEventListener('click', hideRules);
+
+const showRulesBtn = document.querySelector('#showRulesBtn');
+showRulesBtn.addEventListener('click', showRules);
+
 async function startGame(url) {      
     startGameBtn.style.display = 'none';
     newGameBtn.style.display = 'none';
     passBtn.style.display = 'none'; // hide pass button til first user card drawn
-    drawBtn.style.display = 'inline-block';    
+    drawBtn.style.display = 'inline-block';
+    
+    if (rulesDiv.style.display === 'block') {
+        hideRulesBtn.style.display = 'inline-block';
+        showRulesBtn.style.display = 'none';    
+    } else if (rulesDiv.style.display === 'none') {
+        hideRulesBtn.style.display = 'none';
+        showRulesBtn.style.display = 'inline-block';         
+    }    
     
     // reset all
     gameOver = false;
@@ -90,6 +104,19 @@ async function startGame(url) {
         console.log('startGame() error: ', error);
     }
 } // end of startGame()
+
+function hideRules() {
+    rulesDiv.style.display = 'none';
+    hideRulesBtn.style.display = 'none';
+    showRulesBtn.style.display = 'block';    
+}
+
+function showRules() {
+    hideRulesBtn.style.display = 'block';
+    showRulesBtn.style.display = 'none';
+    rulesDiv.style.display = 'block';
+}
+
 
 async function drawCard(player) {
     try {
