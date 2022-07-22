@@ -92,7 +92,7 @@ async function startGame(url) {
             throw Error(response.statusText);
         } else {
             let fetchJson = await response.json();
-            console.log('startGame function: ', fetchJson);
+            //console.log('startGame function: ', fetchJson);
             deck_id = fetchJson.deck_id;
             //console.log('inside function: ', deck_id)
 
@@ -143,7 +143,7 @@ async function drawCard(player) {
                     computerCards.push(card);
                 }                
 
-                console.log('computer cards values: ', computerCards);
+                // console.log('computer cards values: ', computerCards);
                 // console.log('player cards values: ', userCards);
 
                 // show the pass button once the user has drawn the first card
@@ -253,7 +253,7 @@ function calculateTotal(player) {
         }
         if (!gameOver) {
             document.getElementById('computerTotal').innerHTML = '?';
-            console.log('computer Total: ', total);
+            // console.log('computer Total: ', total);
         } else if (gameOver) {            
             document.getElementById('computerTotal').innerHTML = total;
         }        
@@ -266,7 +266,7 @@ function calculateTotal(player) {
             }            
         }        
     }     
-    console.log('Game Over: ', gameOver);
+    // console.log('Game Over: ', gameOver);
 }  // end of calculateTotal()
 
 function passProcess() {
